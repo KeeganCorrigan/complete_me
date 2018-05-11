@@ -7,4 +7,8 @@ class CompleteMe
     @root = Node.new
   end
 
+  def insert(word)
+    return 1
+  end
+
 end
