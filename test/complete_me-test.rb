@@ -41,6 +41,10 @@ class CompleteMeTest < Minitest::Test
 
     assert_equal 1, complete.count
 
+    complete.insert("pizzeria")
+
+    assert_equal 2, complete.count
+
   end
 
 end
