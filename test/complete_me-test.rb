@@ -57,6 +57,7 @@ class CompleteMeTest < Minitest::Test
   end
 
   def test_populate
+    # skip
     complete = CompleteMe.new
 
     test_file = File.read("/Users/MacInnes/test_file.txt")
