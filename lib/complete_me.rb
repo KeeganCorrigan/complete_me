@@ -9,22 +9,25 @@ class CompleteMe
   end
 
   def insert(node = @root, word)
-    if word.length == 0
-      node.is_word = true
+
+    if word.length == 0 # word complete, base case
+      node.is_word = true # refactor to nil if not a word...?
     else
       word_array = word.chars
-      next_char=word_array[0]
+      next_char = word_array[0]
       word_array.shift
-      if node.child_nodes[next_char] == nil #creates a new branch if one doesn't alrady exist
+      if node.child_nodes[next_char] == nil #creates a new branch if one doesn't already exist
         node.child_nodes[next_char] = Node.new
       end
+
       insert(node.child_nodes[next_char], word_array.join)
     end
   end
 
   def count(current_node = @root, total = 0)
-    keys = current_node.child_nodes.keys  
-    # binding.pry
+
+    keys = current_node.child_nodes.keys
+    
     if current_node.is_word && keys.length == 0 # leaf, break statement
       total += 1
       return total
@@ -34,6 +37,7 @@ class CompleteMe
         return count(current_node.child_nodes[key], total)
       end
     else
+      # binding.pry
       keys.each do |key| # start a recursive call through every branch below
         return count(current_node.child_nodes[key], total)
       end

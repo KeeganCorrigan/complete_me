@@ -32,16 +32,26 @@ class CompleteMeTest < Minitest::Test
     assert_equal ["i"], complete.root.child_nodes["p"].child_nodes.keys
     assert_equal true, complete.root.child_nodes["p"].child_nodes["i"].child_nodes["z"].child_nodes["z"].child_nodes["a"].is_word
 
+    complete.insert("pize")
+    
+
+    assert_equal 2, complete.root.child_nodes["p"].child_nodes["i"].child_nodes["z"].child_nodes.keys.length
+
+    complete.insert("pizooo")
+
+    assert_equal 3, complete.root.child_nodes["p"].child_nodes["i"].child_nodes["z"].child_nodes.keys.length
+    # puts complete.root.child_nodes["p"].child_nodes["i"].child_nodes["z"].child_nodes.keys
   end
 
   def test_count
+    # skip
     complete = CompleteMe.new
 
     complete.insert("pizza")
 
     assert_equal 1, complete.count
 
-    complete.insert("pizzeria")
+    complete.insert("pize")
 
     assert_equal 2, complete.count
 
