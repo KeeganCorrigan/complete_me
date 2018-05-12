@@ -75,6 +75,16 @@ class CompleteMeTest < Minitest::Test
 
   end
 
+  def test_suggest
+    complete = CompleteMe.new
+    complete.insert("pizza")
+    complete.insert("pizzaz")
+    complete.insert("pizzeria")
+    complete.insert("duck")
+
+    assert_equal ["pizza", "pizzaz", "pizzeria"], complete.suggest("piz")
+  end
+
 end
 
 

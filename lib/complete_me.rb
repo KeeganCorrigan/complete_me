@@ -45,5 +45,24 @@ class CompleteMe
     return @total_words
   end
 
-
+  def suggest(node = @root, current_word = "", fragment)
+    children = node.child_nodes.keys
+    if fragment.length != 0
+      next_char=fragment[0]
+      if node.child_nodes[next_char] != nil
+        fragment_array = fragment.chars
+        fragment_array.shift
+        return suggest(node.child_nodes[next_char], current_word+next_char, fragment_array.join)
+      end
+    else
+      words=[]
+      if node.is_word
+        words.push(current_word)
+      end
+      children.each do | child |
+        words += suggest(node.child_nodes[child], current_word + child, fragment)
+      end
+      return words
+    end
+  end
 end
