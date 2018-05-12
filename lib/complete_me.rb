@@ -24,7 +24,7 @@ class CompleteMe
 
   def count(current_node = @root, total = 0)
     keys = current_node.child_nodes.keys  
-    binding.pry
+    # binding.pry
     if current_node.is_word && keys.length == 0 # leaf, break statement
       total += 1
       return total
