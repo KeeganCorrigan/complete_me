@@ -2,16 +2,19 @@ require "./lib/node"
 require 'pry'
 
 class CompleteMe
-  attr_reader :root
+  attr_reader :root,
+              :count
 
   def initialize
     @root = Node.new
+    @count = 0
   end
 
   def insert(node = @root, word)
 
     if word.length == 0 # word complete, base case
       node.is_word = true # refactor to nil if not a word...?
+      @count += 1
     else
       word_array = word.chars
       next_char = word_array[0]
@@ -24,23 +27,7 @@ class CompleteMe
     end
   end
 
-  def count(current_node = @root, total = 0)
+  
 
-    keys = current_node.child_nodes.keys
-    
-    if current_node.is_word && keys.length == 0 # leaf, break statement
-      total += 1
-      return total
-    elsif current_node.is_word # a word, but more branches below
-      total += 1
-      keys.each do |key| # start a recursive call through every branch below
-        return count(current_node.child_nodes[key], total)
-      end
-    else
-      # binding.pry
-      keys.each do |key| # start a recursive call through every branch below
-        return count(current_node.child_nodes[key], total)
-      end
-    end
-  end
+
 end
