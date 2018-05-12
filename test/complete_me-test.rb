@@ -59,12 +59,19 @@ class CompleteMeTest < Minitest::Test
   def test_populate
     complete = CompleteMe.new
 
-    test_file = File.read("/usr/share/dict/words")
+    test_file = File.read("/Users/MacInnes/test_file.txt")
+
+    dictionary = File.read("/usr/share/dict/words")
 
     complete.populate(test_file)
 
+    assert_equal ["A", "a"], complete.root.child_nodes.keys
+    assert_equal 100, complete.count
+
+    complete.populate(dictionary)
+
     assert_equal 235886, complete.count
-    
+
   end
 
 end
