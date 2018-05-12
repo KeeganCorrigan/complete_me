@@ -34,4 +34,23 @@ class CompleteMeTest < Minitest::Test
 
   end
 
+  def test_count
+    complete = CompleteMe.new
+
+    complete.insert("pizza")
+
+    assert_equal 1, complete.count
+
+  end
+
 end
+
+
+
+
+
+
+
+
+
+

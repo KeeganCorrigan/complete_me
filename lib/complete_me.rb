@@ -22,4 +22,21 @@ class CompleteMe
     end
   end
 
+  def count(current_node = @root, total = 0)
+    keys = current_node.child_nodes.keys  
+    # binding.pry
+    if current_node.is_word && keys.length == 0 # leaf, break statement
+      total += 1
+      return total
+    elsif current_node.is_word # a word, but more branches below
+      total += 1
+      keys.each do |key| # start a recursive call through every branch below
+        count(current_node.child_nodes[key], total)
+      end
+    else
+      keys.each do |key| # start a recursive call through every branch below
+        return count(current_node.child_nodes[key], total)
+      end
+    end
+  end
 end
