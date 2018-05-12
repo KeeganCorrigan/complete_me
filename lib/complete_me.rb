@@ -27,7 +27,11 @@ class CompleteMe
     end
   end
 
-  
+  def populate(file)
+    file.each_line do |word|
+      insert(word)
+    end
+  end
 
 
 end

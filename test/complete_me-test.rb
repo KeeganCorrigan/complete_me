@@ -19,7 +19,7 @@ class CompleteMeTest < Minitest::Test
   def test_insert
     complete = CompleteMe.new
     test_hash = Hash.new
-    # test_node = Node.new()
+
 
     assert_equal test_hash, complete.root.child_nodes
 
@@ -40,11 +40,10 @@ class CompleteMeTest < Minitest::Test
     complete.insert("pizooo")
 
     assert_equal 3, complete.root.child_nodes["p"].child_nodes["i"].child_nodes["z"].child_nodes.keys.length
-    # puts complete.root.child_nodes["p"].child_nodes["i"].child_nodes["z"].child_nodes.keys
+    
   end
 
   def test_count
-    # skip
     complete = CompleteMe.new
 
     complete.insert("pizza")
@@ -55,6 +54,17 @@ class CompleteMeTest < Minitest::Test
 
     assert_equal 2, complete.count
 
+  end
+
+  def test_populate
+    complete = CompleteMe.new
+
+    test_file = File.read("/usr/share/dict/words")
+
+    complete.populate(test_file)
+
+    assert_equal 235886, complete.count
+    
   end
 
 end
