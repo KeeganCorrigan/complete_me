@@ -33,14 +33,14 @@ class CompleteMeTest < Minitest::Test
     assert_equal true, complete.root.child_nodes["p"].child_nodes["i"].child_nodes["z"].child_nodes["z"].child_nodes["a"].is_word
 
     complete.insert("pize")
-    
+
 
     assert_equal 2, complete.root.child_nodes["p"].child_nodes["i"].child_nodes["z"].child_nodes.keys.length
 
     complete.insert("pizooo")
 
     assert_equal 3, complete.root.child_nodes["p"].child_nodes["i"].child_nodes["z"].child_nodes.keys.length
-    
+
   end
 
   def test_count
@@ -60,14 +60,7 @@ class CompleteMeTest < Minitest::Test
     # skip
     complete = CompleteMe.new
 
-    test_file = File.read("/Users/MacInnes/test_file.txt")
-
     dictionary = File.read("/usr/share/dict/words")
-
-    complete.populate(test_file)
-
-    assert_equal ["A", "a"], complete.root.child_nodes.keys
-    assert_equal 100, complete.count
 
     complete.populate(dictionary)
 
@@ -86,13 +79,3 @@ class CompleteMeTest < Minitest::Test
   end
 
 end
-
-
-
-
-
-
-
-
-
-
