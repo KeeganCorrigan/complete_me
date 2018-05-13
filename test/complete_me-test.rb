@@ -78,4 +78,18 @@ class CompleteMeTest < Minitest::Test
     assert_equal ["pizza", "pizzaz", "pizzeria"], complete.suggest("piz")
   end
 
+  def test_delete
+    complete = CompleteMe.new
+    complete.insert("pizza")
+    complete.insert("pizzaz")
+    complete.insert("pizzeria")
+    complete.insert("duck")
+
+    assert_equal ["pizza", "pizzaz", "pizzeria"], complete.suggest("piz")
+
+    complete.delete("pizzaz")
+
+    assert_equal ["pizza", "pizzeria"], complete.suggest("piz")
+  end
+
 end

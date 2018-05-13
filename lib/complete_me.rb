@@ -65,4 +65,24 @@ class CompleteMe
       return words
     end
   end
+
+  def delete(node = @root, current_word = "", word)
+    if current_word == word
+      node.is_word = false
+      if node.child_nodes.empty?
+        return true
+      end
+    else
+      next_char = word[current_word.length]
+      destruct = delete(node.child_nodes[next_char], current_word+next_char, word)
+      if destruct
+        node.child_nodes.delete(next_char)
+      end
+      if node.is_word
+        destruct=false
+      end
+
+      return destruct
+    end
+  end
 end
