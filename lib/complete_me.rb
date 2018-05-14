@@ -45,22 +45,35 @@ class CompleteMe
     return @total_words
   end
 
-  def suggest(node = @root, current_word = "", fragment)
+  def suggest(fragment)
+    weighted_array = recursive_suggest(@root, "", fragment)
+    return_array = Array.new
+    weighted_array.sort_by! do |word|
+      word[0] * -1
+    end
+    weighted_array.each do |word|
+      return_array.push(word[1])
+    end
+
+    return_array
+  end
+
+  def recursive_suggest(node = @root, current_word = "", fragment)
     children = node.child_nodes.keys
     if fragment.length != 0
       next_char=fragment[0]
       if node.child_nodes[next_char] != nil
         fragment_array = fragment.chars
         fragment_array.shift
-        return suggest(node.child_nodes[next_char], current_word+next_char, fragment_array.join)
+        return recursive_suggest(node.child_nodes[next_char], current_word+next_char, fragment_array.join)
       end
     else
       words=[]
       if node.is_word
-        words.push(current_word)
+        words.push([node.weight, current_word])
       end
       children.each do | child |
-        words += suggest(node.child_nodes[child], current_word + child, fragment)
+        words+=recursive_suggest(node.child_nodes[child], current_word + child, fragment)
       end
       return words
     end
@@ -83,6 +96,15 @@ class CompleteMe
       end
 
       return destruct
+    end
+  end
+
+  def select(word, node = @root, current_word = "" )
+    if current_word == word
+      node.weight += 1
+    else
+      next_char = word[current_word.length]
+      select(word, node.child_nodes[next_char], current_word + next_char)
     end
   end
 end
