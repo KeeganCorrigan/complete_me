@@ -99,12 +99,12 @@ class CompleteMe
     end
   end
 
-  def select(word, node = @root, current_word = "" )
+  def select(substring, word, node = @root, current_word = "" )
     if current_word == word
       node.weight += 1
     else
       next_char = word[current_word.length]
-      select(word, node.child_nodes[next_char], current_word + next_char)
+      select(substring, word, node.child_nodes[next_char], current_word + next_char)
     end
   end
 end
