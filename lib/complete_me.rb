@@ -1,4 +1,4 @@
-require "./lib/node"
+require_relative "node"
 require 'pry'
 
 class CompleteMe
