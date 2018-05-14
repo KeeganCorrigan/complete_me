@@ -107,4 +107,20 @@ class CompleteMe
       select(substring, word, node.child_nodes[next_char], current_word + next_char)
     end
   end
+
+  def load_addresses
+    file = File.read("./addresses.csv")
+    formatted_file = []
+    file.each_line do |line|
+      formatted_file << line
+    end
+    formatted_file.shift # removes first line
+    formatted_file.map! do |each|
+      each.split(",")[-1]
+    end
+
+    populate(formatted_file.join())
+
+  end
+
 end
