@@ -10,7 +10,7 @@ class Node
     @child_nodes=Hash.new
     @is_word = is_word
     @checked = checked
-    @weight = 0
+    @weight = {}
   end
 
 end
