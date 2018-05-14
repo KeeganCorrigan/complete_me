@@ -90,6 +90,7 @@ class CompleteMeTest < Minitest::Test
     complete.delete("pizzaz")
 
     assert_equal ["pizza", "pizzeria"], complete.suggest("piz")
+    assert_nil complete.root.child_nodes['p'].child_nodes['i'].child_nodes['z'].child_nodes['z'].child_nodes['a'].child_nodes['z']
   end
 
 end
