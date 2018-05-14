@@ -60,17 +60,19 @@ class CompleteMe
 
   def recursive_suggest(node = @root, current_word = "", fragment)
     children = node.child_nodes.keys
-    if fragment.length != 0
-      next_char=fragment[0]
+    if fragment.length > current_word.length
+      next_char=fragment[current_word.length]
       if node.child_nodes[next_char] != nil
-        fragment_array = fragment.chars
-        fragment_array.shift
-        return recursive_suggest(node.child_nodes[next_char], current_word+next_char, fragment_array.join)
+        return recursive_suggest(node.child_nodes[next_char], current_word+next_char, fragment)
       end
     else
       words=[]
       if node.is_word
-        words.push([node.weight, current_word])
+        weight = 0
+        if node.weight[fragment] != nil
+          weight=node.weight[fragment]
+        end
+        words.push([weight, current_word])
       end
       children.each do | child |
         words+=recursive_suggest(node.child_nodes[child], current_word + child, fragment)
@@ -101,7 +103,11 @@ class CompleteMe
 
   def select(substring, word, node = @root, current_word = "" )
     if current_word == word
-      node.weight += 1
+      if node.weight[substring] == nil
+        node.weight[substring] = 1
+      else
+        node.weight[substring] += 1
+      end
     else
       next_char = word[current_word.length]
       select(substring, word, node.child_nodes[next_char], current_word + next_char)

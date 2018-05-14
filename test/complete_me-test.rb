@@ -101,11 +101,15 @@ class CompleteMeTest < Minitest::Test
     complete.insert("duck")
     node_to_test = complete.root.child_nodes['d'].child_nodes['u'].child_nodes['c'].child_nodes['k']
 
-    assert_equal 0, node_to_test.weight
+    first_hash = Hash.new
+    assert_equal first_hash, node_to_test.weight
 
     complete.select('du', 'duck')
 
-    assert_equal 1, node_to_test.weight
+    second_hash = Hash.new
+    second_hash["du"] = 1
+
+    assert_equal second_hash, node_to_test.weight
   end
 
   def test_weight
