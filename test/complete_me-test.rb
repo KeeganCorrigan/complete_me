@@ -93,4 +93,32 @@ class CompleteMeTest < Minitest::Test
     assert_nil complete.root.child_nodes['p'].child_nodes['i'].child_nodes['z'].child_nodes['z'].child_nodes['a'].child_nodes['z']
   end
 
+  def test_select
+    complete = CompleteMe.new
+    complete.insert("pizza")
+    complete.insert("pizzaz")
+    complete.insert("pizzeria")
+    complete.insert("duck")
+    node_to_test = complete.root.child_nodes['d'].child_nodes['u'].child_nodes['c'].child_nodes['k']
+
+    assert_equal 0, node_to_test.weight
+
+    complete.select('duck')
+
+    assert_equal 1, node_to_test.weight
+  end
+
+  def test_weight
+    complete = CompleteMe.new
+    complete.insert("pizza")
+    complete.insert("pizzaz")
+    complete.insert("pizzeria")
+    complete.insert("duck")
+
+    assert_equal ["pizza", "pizzaz", "pizzeria"], complete.suggest("piz")
+
+    complete.select('pizzaz')
+
+    assert_equal ["pizzaz", "pizza", "pizzeria"], complete.suggest("piz")
+  end
 end
