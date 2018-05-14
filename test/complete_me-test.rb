@@ -5,18 +5,21 @@ require "./lib/complete_me.rb"
 class CompleteMeTest < Minitest::Test
 
   def test_exists
+    skip
     complete = CompleteMe.new
 
     assert_instance_of CompleteMe, complete
   end
 
   def test_root_exists
+    skip
     complete = CompleteMe.new
 
     assert_instance_of Node, complete.root
   end
 
   def test_insert
+    skip
     complete = CompleteMe.new
     test_hash = Hash.new
 
@@ -44,6 +47,7 @@ class CompleteMeTest < Minitest::Test
   end
 
   def test_count
+    skip
     complete = CompleteMe.new
 
     complete.insert("pizza")
@@ -57,6 +61,7 @@ class CompleteMeTest < Minitest::Test
   end
 
   def test_populate
+    skip
     # skip
     complete = CompleteMe.new
 
@@ -69,6 +74,7 @@ class CompleteMeTest < Minitest::Test
   end
 
   def test_suggest
+    skip
     complete = CompleteMe.new
     complete.insert("pizza")
     complete.insert("pizzaz")
@@ -79,6 +85,7 @@ class CompleteMeTest < Minitest::Test
   end
 
   def test_delete
+    skip
     complete = CompleteMe.new
     complete.insert("pizza")
     complete.insert("pizzaz")
@@ -94,6 +101,7 @@ class CompleteMeTest < Minitest::Test
   end
 
   def test_select
+    skip
     complete = CompleteMe.new
     complete.insert("pizza")
     complete.insert("pizzaz")
@@ -109,6 +117,7 @@ class CompleteMeTest < Minitest::Test
   end
 
   def test_weight
+    skip
     complete = CompleteMe.new
     complete.insert("pizza")
     complete.insert("pizzaz")
@@ -121,4 +130,24 @@ class CompleteMeTest < Minitest::Test
 
     assert_equal ["pizzaz", "pizza", "pizzeria"], complete.suggest("piz")
   end
+
+  def test_addresses_load
+    complete = CompleteMe.new
+
+    complete.load_addresses
+
+    assert_equal ["2450 S University Blvd Unit 342"], complete.suggest("2450 S University Blvd Unit 342")
+    assert_equal ["2450 Larimer St"], complete.suggest("2450 Lari")
+    assert_equal 311764, complete.count
+
+  end
 end
+
+
+
+
+
+
+
+
+
