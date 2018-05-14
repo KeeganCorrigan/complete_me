@@ -103,7 +103,7 @@ class CompleteMeTest < Minitest::Test
 
     assert_equal 0, node_to_test.weight
 
-    complete.select('duck')
+    complete.select('du', 'duck')
 
     assert_equal 1, node_to_test.weight
   end
@@ -117,7 +117,7 @@ class CompleteMeTest < Minitest::Test
 
     assert_equal ["pizza", "pizzaz", "pizzeria"], complete.suggest("piz")
 
-    complete.select('pizzaz')
+    complete.select('piz', 'pizzaz')
 
     assert_equal ["pizzaz", "pizza", "pizzeria"], complete.suggest("piz")
   end
