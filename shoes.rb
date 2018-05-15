@@ -22,6 +22,7 @@ Shoes.app(title: "CompleteMe", width: 800, height: 600, resizable: false) do
     flow(margin: 15) do
       para "Select an option:"
     end
+    
     @output = flow(margin: 15) do
 
     end
