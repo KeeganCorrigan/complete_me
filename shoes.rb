@@ -2,7 +2,7 @@ require './lib/complete_me'
 
 complete = CompleteMe.new
 
-Shoes.app(title: "CompleteMe", width: 800, height: 600, resizable: false) do
+Shoes.app(title: "CompleteMe", width: 1000, height: 600, resizable: false) do
     background white
     para "Welcome to CompleteMe!"
 

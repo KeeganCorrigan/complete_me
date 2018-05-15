@@ -7,7 +7,7 @@ class CompleteMe
 
   def initialize
     @root = Node.new
-    @total_words = 0
+    @total_words = 0 # factor this out and refactor count method
   end
 
   def insert(node = @root, word)
@@ -26,7 +26,7 @@ class CompleteMe
     end
   end
 
-  def populate(file)
+  def populate(file) # correct populate to work with a list of words "word\nword_2\n" etc
     file.each_line do |word|
       if word.length > 0
         insert(word.chomp)
