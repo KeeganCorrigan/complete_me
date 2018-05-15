@@ -1,25 +1,23 @@
 require "minitest/autorun"
 require "minitest/pride"
 require "./lib/complete_me.rb"
+require 'pry'
 
 class CompleteMeTest < Minitest::Test
 
   def test_exists
-    skip
     complete = CompleteMe.new
 
     assert_instance_of CompleteMe, complete
   end
 
   def test_root_exists
-    skip
     complete = CompleteMe.new
 
     assert_instance_of Node, complete.root
   end
 
   def test_insert
-    skip
     complete = CompleteMe.new
     test_hash = Hash.new
 
@@ -47,7 +45,6 @@ class CompleteMeTest < Minitest::Test
   end
 
   def test_count
-    skip
     complete = CompleteMe.new
 
     complete.insert("pizza")
@@ -61,8 +58,7 @@ class CompleteMeTest < Minitest::Test
   end
 
   def test_populate
-    skip
-    # skip
+
     complete = CompleteMe.new
 
     dictionary = File.read("/usr/share/dict/words")
@@ -74,7 +70,6 @@ class CompleteMeTest < Minitest::Test
   end
 
   def test_suggest
-    skip
     complete = CompleteMe.new
     complete.insert("pizza")
     complete.insert("pizzaz")
@@ -85,7 +80,6 @@ class CompleteMeTest < Minitest::Test
   end
 
   def test_delete
-    skip
     complete = CompleteMe.new
     complete.insert("pizza")
     complete.insert("pizzaz")
@@ -101,7 +95,6 @@ class CompleteMeTest < Minitest::Test
   end
 
   def test_select
-    skip
     complete = CompleteMe.new
     complete.insert("pizza")
     complete.insert("pizzaz")
@@ -121,7 +114,6 @@ class CompleteMeTest < Minitest::Test
   end
 
   def test_weight
-    skip
     complete = CompleteMe.new
     complete.insert("pizza")
     complete.insert("pizzaz")
@@ -145,13 +137,13 @@ class CompleteMeTest < Minitest::Test
     assert_equal 311764, complete.count
 
   end
+
+  def test_substrings
+    complete = CompleteMe.new
+    complete.insert('complete')
+    complete.insert('incomplete')
+    complete.insert('duck')
+
+    assert_equal ['complete', 'incomplete'], complete.suggest_substrings('com')
+  end
 end
-
-
-
-
-
-
-
-
-

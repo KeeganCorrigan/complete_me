@@ -129,4 +129,19 @@ class CompleteMe
 
   end
 
+  def suggest_substrings(node = @root, current_word = "", fragment)
+    return_array = []
+    if current_word.include?(fragment) && node.is_word
+      return_array.push(current_word)
+    end
+
+    next_chars=node.child_nodes.keys
+
+    next_chars.each do | next_char |
+      return_array += suggest_substrings(node.child_nodes[next_char], current_word+next_char, fragment)
+    end
+
+    return_array
+  end
+
 end
