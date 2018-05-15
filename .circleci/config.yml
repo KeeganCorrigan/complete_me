@@ -19,6 +19,6 @@ jobs:
           name: run tests
           command: ruby test/complete_me-test.rb
 
-      -run:
+      - run:
           name: lint
           command: "gem install rubocop && rubocop"
