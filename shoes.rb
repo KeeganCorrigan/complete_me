@@ -16,7 +16,7 @@ Shoes.app(title: "CompleteMe", width: 800, height: 600, resizable: false) do
       para "What partial word would you like to search for?"
       @input = edit_line # this is the substring to be searched
       @submit = button "Submit"
-
+      @substring_submit = button "Submit substring"
     end
 
     flow(margin: 15) do
@@ -37,6 +37,24 @@ Shoes.app(title: "CompleteMe", width: 800, height: 600, resizable: false) do
       @results = [] 
       flow(margin: 15) do
         suggestions_array = complete.suggest(@input.text)
+        suggestions_array.each do |suggestion|
+          @results << suggestion
+        end
+        @results.each do |result|
+          @output.append do 
+            @select_button = button(result) do
+              complete.select(@input, result)
+            end
+          end
+        end
+      end
+    end
+
+    @substring_submit.click do
+      @output.clear
+      @results = []
+      flow(margin: 15) do
+        suggestions_array = complete.suggest_substrings(@input.text)
         suggestions_array.each do |suggestion|
           @results << suggestion
         end
