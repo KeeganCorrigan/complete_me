@@ -93,7 +93,7 @@ class CompleteMe
       if destruct
         node.child_nodes.delete(next_char)
       end
-      if node.is_word
+      if node.is_word || !node.child_nodes.empty? 
         destruct=false
       end
 

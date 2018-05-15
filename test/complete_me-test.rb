@@ -29,9 +29,9 @@ class CompleteMeTest < Minitest::Test
     refute_nil complete.root.child_nodes["p"]
     refute_nil complete.root.child_nodes["p"].child_nodes["i"]
 
-    refute_equal true, complete.root.child_nodes["p"].child_nodes["i"].child_nodes["z"].child_nodes["z"].is_word
+    refute complete.root.child_nodes["p"].child_nodes["i"].child_nodes["z"].child_nodes["z"].is_word
     assert_equal ["i"], complete.root.child_nodes["p"].child_nodes.keys
-    assert_equal true, complete.root.child_nodes["p"].child_nodes["i"].child_nodes["z"].child_nodes["z"].child_nodes["a"].is_word
+    assert complete.root.child_nodes["p"].child_nodes["i"].child_nodes["z"].child_nodes["z"].child_nodes["a"].is_word
 
     complete.insert("pize")
 
@@ -48,10 +48,12 @@ class CompleteMeTest < Minitest::Test
     complete = CompleteMe.new
 
     complete.insert("pizza")
+    complete.insert("pizza")
 
     assert_equal 1, complete.count
 
     complete.insert("pize")
+    complete.insert('pizza')
 
     assert_equal 2, complete.count
 
@@ -60,7 +62,8 @@ class CompleteMeTest < Minitest::Test
   def test_populate
     skip
     complete = CompleteMe.new
-
+    complete.populate('cat\ndog\n')
+    assert_equal 2, complete.count
     dictionary = File.read("/usr/share/dict/words")
 
     complete.populate(dictionary)
@@ -92,9 +95,16 @@ class CompleteMeTest < Minitest::Test
 
     assert_equal ["pizza", "pizzeria"], complete.suggest("piz")
     assert_nil complete.root.child_nodes['p'].child_nodes['i'].child_nodes['z'].child_nodes['z'].child_nodes['a'].child_nodes['z']
+
+    complete.insert("pizzaaam")
+    complete.insert("pizzaaaz")
+
+    complete.delete("pizzaaaz")
+
+    assert_equal ["pizza", "pizzaaam", "pizzeria"], complete.suggest('piz')
   end
 
-  def test_select
+  def test_weight
     complete = CompleteMe.new
     complete.insert("pizza")
     complete.insert("pizzaz")
@@ -113,7 +123,7 @@ class CompleteMeTest < Minitest::Test
     assert_equal second_hash, node_to_test.weight
   end
 
-  def test_weight
+  def test_select
     complete = CompleteMe.new
     complete.insert("pizza")
     complete.insert("pizzaz")
@@ -128,6 +138,7 @@ class CompleteMeTest < Minitest::Test
   end
 
   def test_addresses_load
+    skip
     complete = CompleteMe.new
 
     complete.load_addresses
