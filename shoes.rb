@@ -1,5 +1,9 @@
+require './lib/complete_me'
+
+complete = CompleteMe.new
+
 Shoes.app(title: "CompleteMe",
-  width: 800, height: 600, resizable: false) {
+  width: 800, height: 600, resizable: false) do
     background white
     para "Welcome to CompleteMe!"
 
@@ -11,11 +15,15 @@ Shoes.app(title: "CompleteMe",
     end
     flow(margin: 15) do
       para "What partial word would you like to search for?"
-      edit_line 
+      @input = edit_line 
       @submit = button "Submit"
     end
-    @submit.click {
-      @input = edit_line.text()
-    }
+    flow(margin: 15) do
+      @test = para "Test area"
+    end
+    @submit.click do
+      
+      @test.replace @input.text
+    end
 
-}
+end

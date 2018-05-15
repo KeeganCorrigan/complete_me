@@ -1,5 +1,5 @@
 require_relative "node"
-# require 'pry'
+require 'pry'
 
 class CompleteMe
   attr_reader :root,
@@ -120,7 +120,10 @@ class CompleteMe
     end
 
     populate(formatted_file.join())
-
+    # to see the duplicated entries: file.each_line.each_with_object(Hash.new(0)) {|object, line| line[object] += 1}.select {|line, frequency| frequency > 1}
   end
 
 end
+
+
+# object = Hash.new(0); file.each_line.each {|line| line[object] += 1}; object.select {|line, frequency| frequency > 1}
