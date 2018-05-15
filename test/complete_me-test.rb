@@ -1,7 +1,7 @@
 require "minitest/autorun"
 require "minitest/pride"
 require "./lib/complete_me.rb"
-require 'pry'
+# require 'pry'
 
 class CompleteMeTest < Minitest::Test
 
