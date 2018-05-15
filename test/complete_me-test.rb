@@ -1,26 +1,24 @@
 require "minitest/autorun"
 require "minitest/pride"
 require "./lib/complete_me.rb"
+require 'pry'
 
 
 class CompleteMeTest < Minitest::Test
 
   def test_exists
-    
     complete = CompleteMe.new
 
     assert_instance_of CompleteMe, complete
   end
 
   def test_root_exists
-    
     complete = CompleteMe.new
 
     assert_instance_of Node, complete.root
   end
 
   def test_insert
-    
     complete = CompleteMe.new
     test_hash = Hash.new
 
@@ -48,7 +46,6 @@ class CompleteMeTest < Minitest::Test
   end
 
   def test_count
-    
     complete = CompleteMe.new
 
     complete.insert("pizza")
@@ -62,8 +59,6 @@ class CompleteMeTest < Minitest::Test
   end
 
   def test_populate
-    
-
     complete = CompleteMe.new
 
     dictionary = File.read("/usr/share/dict/words")
@@ -75,7 +70,6 @@ class CompleteMeTest < Minitest::Test
   end
 
   def test_suggest
-    
     complete = CompleteMe.new
     complete.insert("pizza")
     complete.insert("pizzaz")
@@ -86,7 +80,6 @@ class CompleteMeTest < Minitest::Test
   end
 
   def test_delete
-    
     complete = CompleteMe.new
     complete.insert("pizza")
     complete.insert("pizzaz")
@@ -102,7 +95,6 @@ class CompleteMeTest < Minitest::Test
   end
 
   def test_select
-    
     complete = CompleteMe.new
     complete.insert("pizza")
     complete.insert("pizzaz")
@@ -110,15 +102,18 @@ class CompleteMeTest < Minitest::Test
     complete.insert("duck")
     node_to_test = complete.root.child_nodes['d'].child_nodes['u'].child_nodes['c'].child_nodes['k']
 
-    assert_equal 0, node_to_test.weight
+    first_hash = Hash.new
+    assert_equal first_hash, node_to_test.weight
 
     complete.select('du', 'duck')
 
-    assert_equal 1, node_to_test.weight
+    second_hash = Hash.new
+    second_hash["du"] = 1
+
+    assert_equal second_hash, node_to_test.weight
   end
 
   def test_weight
-    
     complete = CompleteMe.new
     complete.insert("pizza")
     complete.insert("pizzaz")
@@ -143,13 +138,13 @@ class CompleteMeTest < Minitest::Test
     assert_equal 311764, complete.count
 
   end
+
+  def test_substrings
+    complete = CompleteMe.new
+    complete.insert('complete')
+    complete.insert('incomplete')
+    complete.insert('duck')
+
+    assert_equal ['complete', 'incomplete'], complete.suggest_substrings('com')
+  end
 end
-
-
-
-
-
-
-
-
-
