@@ -17,5 +17,5 @@ jobs:
       # run tests!
       - run:
           name: run tests
-          command: ruby test/test_complete-test.rb
+          command: ruby test/complete_me-test.rb
 
