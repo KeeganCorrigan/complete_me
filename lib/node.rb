@@ -3,13 +3,11 @@ class Node
 
   attr_accessor :is_word,
                 :child_nodes,
-                :checked,
                 :weight
 
-  def initialize(is_word = false, checked = false)
+  def initialize(is_word = false)
     @child_nodes=Hash.new
     @is_word = is_word
-    @checked = checked
     @weight = {}
   end
 

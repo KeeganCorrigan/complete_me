@@ -1,7 +1,7 @@
 require "minitest/autorun"
 require "minitest/pride"
 require "./lib/complete_me.rb"
-# require 'pry'
+require 'pry'
 
 class CompleteMeTest < Minitest::Test
 
@@ -60,10 +60,10 @@ class CompleteMeTest < Minitest::Test
   end
 
   def test_populate
-    skip
     complete = CompleteMe.new
-    complete.populate('cat\ndog\n')
+    complete.populate("cat\ndog\n")
     assert_equal 2, complete.count
+
     dictionary = File.read("/usr/share/dict/words")
 
     complete.populate(dictionary)
@@ -138,7 +138,6 @@ class CompleteMeTest < Minitest::Test
   end
 
   def test_addresses_load
-    skip
     complete = CompleteMe.new
 
     complete.load_addresses

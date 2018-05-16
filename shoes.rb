@@ -2,7 +2,7 @@ require './lib/complete_me'
 
 complete = CompleteMe.new
 
-Shoes.app(title: "CompleteMe", width: 800, height: 600, resizable: false) do
+Shoes.app(title: "CompleteMe", width: 1000, height: 600, resizable: false) do
     background white
     para "Welcome to CompleteMe!"
 
@@ -22,7 +22,7 @@ Shoes.app(title: "CompleteMe", width: 800, height: 600, resizable: false) do
     flow(margin: 15) do
       para "Select an option:"
     end
-    
+
     @output = flow(margin: 15) do
 
     end
@@ -44,7 +44,7 @@ Shoes.app(title: "CompleteMe", width: 800, height: 600, resizable: false) do
         @results.each do |result|
           @output.append do 
             @select_button = button(result) do
-              complete.select(@input, result)
+              complete.select(@input.text, result)
             end
           end
         end
@@ -55,14 +55,14 @@ Shoes.app(title: "CompleteMe", width: 800, height: 600, resizable: false) do
       @output.clear
       @results = []
       flow(margin: 15) do
-        suggestions_array = complete.suggest_substrings(@input.text)
-        suggestions_array.each do |suggestion|
+        sub_suggestions_array = complete.suggest_substrings(@input.text)
+        sub_suggestions_array.each do |suggestion|
           @results << suggestion
         end
         @results.each do |result|
           @output.append do 
             @select_button = button(result) do
-              complete.select(@input, result)
+              complete.select(@input.text, result)
             end
           end
         end
