@@ -146,8 +146,6 @@ class CompleteMeTest < Minitest::Test
   end
 
   def test_addresses_load
-    skip
-    skip
     complete = CompleteMe.new
 
     complete.load_addresses

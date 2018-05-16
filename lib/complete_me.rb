@@ -2,12 +2,10 @@ require_relative "node"
 # require 'pry'
 
 class CompleteMe
-  attr_reader :root,
-              :total_words
+  attr_reader :root
 
   def initialize
     @root = Node.new
-    @total_words = 0 # factor this out and refactor count method
   end
 
   def insert(node = @root, word)
@@ -35,14 +33,15 @@ class CompleteMe
   end
 
   def count(current_node = @root)
-    if current_node.is_word && current_node.checked == false
-      @total_words += 1
-      current_node.checked = true
+    total = 0
+    if current_node.is_word
+      total += 1
     end
-    current_node.child_nodes.each_key do |key|
-      count(current_node.child_nodes[key])
+    nodes = current_node.child_nodes.keys
+    nodes.each do | key |
+      total += count(current_node.child_nodes[key])
     end
-    return @total_words
+    return total
   end
 
   def suggest(fragment)
@@ -93,7 +92,7 @@ class CompleteMe
       if destruct
         node.child_nodes.delete(next_char)
       end
-      if node.is_word || !node.child_nodes.empty? 
+      if node.is_word || !node.child_nodes.empty?
         destruct=false
       end
 
