@@ -10,7 +10,8 @@ Shoes.app(title: "CompleteMe", width: 1000, height: 600, resizable: false) do
       @insert = button "Insert a word"
       @load_dictionary = button "Load the dictionary"
       @load_addresses = button "Load Denver Addresses"
-      @delete = button "Delete a word"     
+      @delete = button "Delete a word"
+      @count = button "Total words"    
     end
     flow(margin: 15) do
       para "What partial word would you like to search for?"
@@ -26,7 +27,13 @@ Shoes.app(title: "CompleteMe", width: 1000, height: 600, resizable: false) do
     @output = flow(margin: 15) do
 
     end
-
+    @count.click do
+      @output.clear
+      @output.append do
+        para "Total words:"
+        para complete.count
+      end
+    end
     
     @insert.click do
       @insert_input = ask("Enter the word you want to input:")
